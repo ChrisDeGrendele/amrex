@@ -25,7 +25,7 @@ void cic_interpolate (const P& p,
 
 #if (AMREX_SPACEDIM == 1)
   
-    amrex::Real lx = (p.pos(0) - plo[0]) * dxi[0] + 0.5; //len
+    amrex::Real lx = (p.pos(0) - plo[0]) * dxi[0] - 0.5; //len
 
     int i = std::floor(lx); //cell
 
@@ -71,9 +71,9 @@ void cic_interpolate (const P& p,
 
 #elif (AMREX_SPACEDIM == 3)
 
-    amrex::Real lx = (p.pos(0) - plo[0]) * dxi[0] + 0.5;
-    amrex::Real ly = (p.pos(1) - plo[1]) * dxi[1] + 0.5;
-    amrex::Real lz = (p.pos(2) - plo[2]) * dxi[2] + 0.5;
+    amrex::Real lx = (p.pos(0) - plo[0]) * dxi[0] - 0.5;
+    amrex::Real ly = (p.pos(1) - plo[1]) * dxi[1] - 0.5;
+    amrex::Real lz = (p.pos(2) - plo[2]) * dxi[2] - 0.5;
 
     int i = std::floor(lx);
     int j = std::floor(ly);
@@ -148,7 +148,7 @@ void mac_interpolate (const P& p,
       val[d] = 0.0;
       for (int ii = 0; ii <= 1; ++ii)
 	{
-	  val[d] += (*(p_uccarr[d]))(ecellx+ii, 0 0,0)*sx[ii];
+	  val[d] += (*(p_uccarr[d]))(ecellx+ii, 0, 0,0)*sx[ii];
 	}		
     }
 
